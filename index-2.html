@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Retail Analytics Dashboard - 99 Speedmart (Simulated)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: Arial; margin:40px; background:#f5f6fa;}
+h1 { text-align:center; }
+.dashboard { display:grid; grid-template-columns:1fr 1fr; gap:30px; }
+.card { background:white; padding:20px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1);}
+.metric { font-size:28px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<h1>Retail Sales Analytics Dashboard (Simulated Data)</h1>
+<h3 style="text-align:center;">Case Study: 99 Speedmart Convenience Store Operations</h3>
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Monthly Revenue (RM)</h3>
+<canvas id="revenueChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Number of Transactions</h3>
+<canvas id="transactionChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Sales by Product Category</h3>
+<canvas id="categoryChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Stock Levels by Category</h3>
+<canvas id="stockChart"></canvas>
+</div>
+
+</div>
+
+<script>
+const data = {"months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], "revenue": [104314.93, 100583.29, 88732.95, 85572.3, 85344.59, 105159.33, 99347.93, 113586.62, 88576.92, 102465.18, 93924.52, 115032.69], "transactions": [4459, 4304, 4201, 4168, 4266, 3940, 3892, 3574, 4075, 4207, 3269, 3474], "avg_order": [23.39, 23.37, 21.12, 20.53, 20.01, 26.69, 25.53, 31.78, 21.74, 24.36, 28.73, 33.11], "categories": {"Beverages": 282901, "Snacks": 230987, "Instant Food": 152751, "Household": 99541}, "stock": {"Beverages": 1914, "Snacks": 1251, "Instant Food": 1235, "Household": 879}};
+
+new Chart(document.getElementById('revenueChart'), {
+type:'line',
+data:{
+labels:data.months,
+datasets:[{label:'Revenue (RM)', data:data.revenue}]
+}
+});
+
+new Chart(document.getElementById('transactionChart'), {
+type:'bar',
+data:{
+labels:data.months,
+datasets:[{label:'Transactions', data:data.transactions}]
+}
+});
+
+new Chart(document.getElementById('categoryChart'), {
+type:'pie',
+data:{
+labels:Object.keys(data.categories),
+datasets:[{data:Object.values(data.categories)}]
+}
+});
+
+new Chart(document.getElementById('stockChart'), {
+type:'doughnut',
+data:{
+labels:Object.keys(data.stock),
+datasets:[{data:Object.values(data.stock)}]
+}
+});
+</script>
+
+</body>
+</html>
